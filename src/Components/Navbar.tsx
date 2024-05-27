@@ -1,29 +1,65 @@
+import { FaLinkedinIn, FaYoutube, FaGithub } from "react-icons/fa6";
+import { animate } from 'framer-motion';
+
 export default function Navbar(){
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+          const top = element.getBoundingClientRect().top + window.scrollY;
+          animate(window.scrollY, top, {
+            duration: 0.8,
+            ease: [0.22, 0.61, 0.36, 1],
+            onUpdate: (latest) => window.scrollTo(0, latest),
+          });
+        }
+      };
+
+      const scrollToTop = () => {
+        animate(window.scrollY, 0, {
+          duration: 0.8,
+          ease: [0.22, 0.61, 0.36, 1],
+          onUpdate: (latest) => window.scrollTo(0, latest),
+        });
+    }
+
+    const openInNewTab = (url:string) => {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+      }
+    
+
+    
     return (
-        <div className="navbar bg-base-100">
-            <div className="flex-1">
-                <a className="btn btn-ghost text-3xl">&lt;Hao Liu&gt;</a>
+        <div className="navbar bg-base-100 fixed top-0 z-10 glass">
+            <div className="dropdown">
+            
             </div>
-            <div className="flex-none">
-                <ul className="menu menu-horizontal px-1">
-                <li><a className="text-xl">Link</a></li>
-                <li>
-                    <details>
-                    <summary className="text-xl">
-                        Parent
-                    </summary>
-                    <ul className="p-2 bg-base-100 rounded-t-none">
-                        <li><a>Link 1</a></li>
-                        <li><a>Link 2</a></li>
-                    </ul>
-                    </details>
-                </li>
+            <div className="flex-1">
+                <button onClick={scrollToTop} className="btn btn-ghost text-3xl">&lt;Hao Liu&gt;</button>
+            </div>
+
+
+
+            
+
+            <div className="navbar-center">
+                <ul className="menu menu-horizontal px-1 hidden lg:flex">
+                    <li><button onClick={()=>scrollToTop()} className="text-xl">Home</button></li>
+                    <li><button onClick={()=>scrollToSection("projects")} className="text-xl">Projects</button></li>
+                    <li><button onClick={()=>scrollToSection("contact")} className="text-xl">Contact</button></li>
+                
+            
                 </ul>
-                <div className="avatar">
-                <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img src="https://media.licdn.com/dms/image/C5603AQHjKxzh3Hw3NQ/profile-displayphoto-shrink_800_800/0/1659620329236?e=1721865600&v=beta&t=vH-swWRyf-WiTRzBub0hZ_n4Fj7jY4BALUd03TgSk6w" />
-                </div>
-                </div>
+                <button>
+                <FaLinkedinIn onClick={()=>openInNewTab("https://www.linkedin.com/in/haoliutech/")} className="m-2 w-8 h-8"/>
+                </button>
+                <button>
+                <FaGithub onClick={()=>openInNewTab("https://github.com/haoliutech")} className="m-2 w-8 h-8"/>
+                </button>
+                <a>
+                <FaYoutube className="m-2 w-8 h-8"/>
+                </a>
+               
             </div>
             </div>
     )

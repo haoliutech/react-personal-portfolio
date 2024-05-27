@@ -1,15 +1,21 @@
 import Article from './Components/Article.tsx'
-import Navbar from './Components/Navbar.tsx'
 import Footer from './Components/Footer.tsx'
 import Hero from './Components/Hero.tsx'
+import Contact from './Components/Contact.tsx'
+import ProjectsDisplay from './Components/ProjectsDisplay.tsx'
+import Header from './Components/Header.tsx'
 
 function App() {
 
   return (
     <> 
-      <Navbar></Navbar>
-      <Hero></Hero>
-      <Article></Article>
+      <Article/>
+      <Header/>
+      <Hero/>
+      <ProjectsDisplay></ProjectsDisplay>
+      
+      <Contact></Contact>
+      
       <Footer></Footer>
     </>
   )
