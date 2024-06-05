@@ -45,6 +45,7 @@ export default function Navbar(){
             <div className="navbar-center">
                 <ul className="menu menu-horizontal px-1 hidden lg:flex">
                     <li><button onClick={()=>scrollToTop()} className="text-xl">Home</button></li>
+                    <li><button className="text-xl" onClick={()=>openInNewTab("https://www.dropbox.com/scl/fi/8hc6xkffqibj8my3up6ul/HaoLiuCV_5june2024.pdf?rlkey=twg3vx7th3du3ef9x99bym8iv&st=e7nvru3i&dl=0")}>Resume</button></li>
                     <li><button onClick={()=>scrollToSection("projects")} className="text-xl">Projects</button></li>
                     <li><button onClick={()=>scrollToSection("contact")} className="text-xl">Contact</button></li>
                 
