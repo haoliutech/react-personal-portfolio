@@ -1,6 +1,15 @@
-import React from "react";
-import { useForm, useWatch } from "react-hook-form";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { useForm, useWatch, SubmitHandler } from "react-hook-form";
+
+interface FormInputs {
+  access_key: string;
+  subject: string;
+  from_name: string;
+  botcheck: boolean;
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function ContactForm() {
   const {
@@ -10,49 +19,52 @@ export default function ContactForm() {
     reset,
     control,
     formState: { errors, isSubmitSuccessful, isSubmitting },
-  } = useForm({
+  } = useForm<FormInputs>({
     mode: "onTouched",
   });
+
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [Message, setMessage] = React.useState("");
 
-  const userName = useWatch({ 
-    control, 
-    name: "name", 
-    defaultValue: "Someone" 
+  const userName = useWatch({
+    control,
+    name: "name",
+    defaultValue: "Someone",
   });
-  
+
   useEffect(() => {
-    setValue('subject', `${userName} sent a message from Website`)
+    setValue('subject', `${userName} sent a message from Website`);
   }, [userName, setValue]);
 
-  const onSubmit = async (data: unknown, e) => {
+  const onSubmit: SubmitHandler<FormInputs> = async (data, e) => {
     console.log(data);
-    await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data, null, 2),
-    })
-      .then(async (response) => {
-        let json = await response.json();
-        if (json.success) {
-          setIsSuccess(true);
-          setMessage(json.message);
-          e.target.reset();
-          reset();
-        } else {
-          setIsSuccess(false);
-          setMessage(json.message);
-        }
-      })
-      .catch((error) => {
-        setIsSuccess(false);
-        setMessage("Client Error. Please check the console.log for more info");
-        console.log(error);
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(data, null, 2),
       });
+
+      const json = await response.json();
+      if (json.success) {
+        setIsSuccess(true);
+        setMessage(json.message);
+        if (e) {
+          e.target.reset();
+        }
+        reset();
+      } else {
+        setIsSuccess(false);
+        setMessage(json.message);
+      }
+    } catch (error) {
+      setIsSuccess(false);
+      setMessage("Client Error. Please check the console.log for more info");
+      console.log(error);
+    }
   };
 
   return (
@@ -112,7 +124,6 @@ export default function ContactForm() {
                 id="email_address"
                 type="email"
                 placeholder="Email Address"
-                name="email"
                 autoComplete="false"
                 className={`w-full px-4 py-3 border-2  rounded-md outline-none  focus:ring-4  ${
                   errors.email
@@ -136,7 +147,6 @@ export default function ContactForm() {
 
             <div className="mb-3">
               <textarea
-                name="message"
                 placeholder="Your Message"
                 className={`w-full px-4 py-3 border-2  rounded-md outline-none  h-36  focus:ring-4  ${
                   errors.message
