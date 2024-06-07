@@ -26,7 +26,7 @@ export default function ContactForm() {
     setValue('subject', `${userName} sent a message from Website`)
   }, [userName, setValue]);
 
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (data: unknown, e) => {
     console.log(data);
     await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -63,7 +63,7 @@ export default function ContactForm() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="hidden"
-              value={import.meta.env.VITE_WEB3FORMS_API_KEY}
+              value={import.meta.env.WEB3FORMS_API_KEY}
               {...register("access_key")}
             />
             <input

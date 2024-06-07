@@ -3,7 +3,7 @@ import Footer from './Components/Footer.tsx'
 import Hero from './Components/Hero.tsx'
 import ProjectsDisplay from './Components/ProjectsDisplay.tsx'
 import Header from './Components/Header.tsx'
-import ContactForm from './Components/ContactForm.tsx'
+import ContactForm from './Components/ContactForm.jsx'
 
 function App() {
 
