@@ -4,6 +4,7 @@ import Hero from './Components/Hero.tsx'
 import Contact from './Components/Contact.tsx'
 import ProjectsDisplay from './Components/ProjectsDisplay.tsx'
 import Header from './Components/Header.tsx'
+import ContactForm from './Components/ContactForm.tsx'
 
 function App() {
 
@@ -13,9 +14,7 @@ function App() {
       <Header/>
       <Hero/>
       <ProjectsDisplay></ProjectsDisplay>
-      
-      <Contact></Contact>
-      
+      <ContactForm></ContactForm>
       <Footer></Footer>
     </>
   )
