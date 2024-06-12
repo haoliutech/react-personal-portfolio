@@ -40,7 +40,7 @@ export default function Navbar() {
         </div>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-32"
+          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-32 bg-slate-50"
         >
           <li>
             <button onClick={() => scrollToTop()} className="text-xl">
