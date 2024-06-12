@@ -15,7 +15,7 @@ const Card: React.FC<CardProps> = ({
   githubURL,
 }) => {
   return (
-    <div className="m-8 card bg-white w-96 h-96 shadow-md sm:w-11/12 grid gir">
+    <div className="m-8 card bg-white w-auto max-w-96 h-96 shadow-md grid">
       <figure className="">
         <img className="object-contain w-48 h-48" src={imgURL} />
       </figure>
